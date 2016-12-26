@@ -2,10 +2,11 @@ package demo
 
 import (
 	"fmt"
-	"github.com/shibukawa/nanogui.go"
-	"github.com/shibukawa/nanovgo"
 	"math"
 	"strconv"
+
+	"github.com/funnywwh/nanogui-go"
+	"github.com/shibukawa/nanovgo"
 )
 
 func ButtonDemo(screen *nanogui.Screen) {
