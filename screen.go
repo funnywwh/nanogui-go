@@ -2,10 +2,11 @@ package nanogui
 
 import (
 	"bytes"
+	"runtime"
+
 	"github.com/goxjs/gl"
 	"github.com/shibukawa/glfw"
 	"github.com/shibukawa/nanovgo"
-	"runtime"
 )
 
 var nanoguiScreens map[*glfw.Window]*Screen = map[*glfw.Window]*Screen{}
@@ -594,6 +595,7 @@ func (s *Screen) resizeCallbackEvent(width, height int) bool {
 	if s.resizeEventCallback != nil {
 		return s.resizeEventCallback(int(float32(fbW)/s.pixelRatio), int(float32(fbH)/s.pixelRatio))
 	}
+	s.DrawAll()
 	return false
 }
 
