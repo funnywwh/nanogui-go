@@ -1,8 +1,9 @@
 package nanogui
 
 import (
-	"github.com/shibukawa/nanovgo"
 	"runtime"
+
+	"github.com/shibukawa/nanovgo"
 )
 
 type PopupButton struct {
@@ -40,7 +41,9 @@ func NewPopupButton(parent Widget, captions ...string) *PopupButton {
 	parentWindow := parent.FindWindow()
 	button.popup = NewPopup(parentWindow.Parent(), parentWindow)
 	button.popup.SetSize(320, 250)
-
+	//[[win fix can't show imagePanel
+	button.popup.panel.SetLayout(NewGroupLayout(0))
+	//]]
 	InitWidget(button, parent)
 
 	runtime.SetFinalizer(button, finalizePopupButton)
