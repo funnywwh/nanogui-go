@@ -2,9 +2,10 @@ package nanogui
 
 import (
 	"fmt"
+	"sort"
+
 	"github.com/shibukawa/glfw"
 	"github.com/shibukawa/nanovgo"
-	"sort"
 )
 
 // Widget is base class of all widgets
@@ -477,7 +478,7 @@ func (w *WidgetImplement) MouseMotionEvent(self Widget, x, y, relX, relY, button
 			return true
 		}
 	}
-	return false
+	return true //win fix
 }
 
 // MouseDragEvent() handles a mouse drag event (default implementation: do nothing)
