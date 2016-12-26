@@ -1,10 +1,11 @@
 package nanogui
 
 import (
-	"github.com/goxjs/gl"
-	"github.com/shibukawa/glfw"
 	"sync"
 	"time"
+
+	"github.com/goxjs/gl"
+	"github.com/shibukawa/glfw"
 )
 
 var mainloopActive bool = false
@@ -28,18 +29,8 @@ func MainLoop() {
 
 	var wg sync.WaitGroup
 
-	/* If there are no mouse/keyboard events, try to refresh the
-	view roughly every 50 ms; this is to support animations
-	such as progress bars while keeping the system load
-	reasonably low */
-	wg.Add(1)
-	go func() {
-		for mainloopActive {
-			time.Sleep(50 * time.Millisecond)
-			glfw.PostEmptyEvent()
-		}
-		wg.Done()
-	}()
+	//win delete for save power
+
 	for mainloopActive {
 		haveActiveScreen := false
 		for _, screen := range nanoguiScreens {
