@@ -124,6 +124,13 @@ func (i *ImagePanel) gridSize() (int, int) {
 }
 
 func (i *ImagePanel) indexForPosition(x, y int) int {
+	//[[win fix get wrong index
+	//x,y is relative to the upper left corner of the parent window
+	//but here is relative to the upper left corner of self
+	ix, iy := i.Position()
+	x, y = x-ix, y-iy
+	//]]
+
 	pX := float32(x-i.margin) / float32(i.thumbSize+i.margin)
 	pY := float32(y-i.margin) / float32(i.thumbSize+i.margin)
 	iconRegion := float32(i.thumbSize) / float32(i.thumbSize+i.spacing)
@@ -133,7 +140,12 @@ func (i *ImagePanel) indexForPosition(x, y int) int {
 	gridCols, gridRows := i.gridSize()
 	overImage = overImage && gridPosX >= 0 && gridPosY >= 0 && gridPosX < gridCols && gridPosY < gridRows
 	if overImage {
-		return gridPosX + gridPosY*gridCols
+		//[[win fix out of array
+		idx := gridPosX + gridPosY*gridCols
+		if idx < len(i.images) {
+			return idx
+		}
+		//]]
 	}
 	return -1
 }
